@@ -1,0 +1,57 @@
+import React from 'react'
+import removeDiacritics from "./emailHelper"
+
+const data = {
+  name: "Łukasz",
+  surname: "Pęcherczyk",
+  tel: "600 000 000",
+  title: "Informatyk - Dział IT",
+  email() {
+    return removeDiacritics(this.name) + '.' + removeDiacritics(this.surname) + '@wpwik.pl'
+  }
+}
+
+class Output extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
+  render() {
+    return (
+      <div style={{fontFamily: "Arial"}}>
+        <div style={{fontSize: "18px", fontWeight: "bold", lineHeight: "180%"}}>
+          <p style={{margin:"0"}}>{data.name} {data.surname}</p>
+        </div>
+        <div style={{lineHeight: "140%", fontSize: "14px"}}>
+            <p style={{margin: "0", fontStyle: "italic"}}>{data.title}</p>
+            <p style={{margin: "0"}}>{data.tel}</p>
+            <p style={{margin: "0"}}>e-mail: <a href={"mailto:" + data.email()}>{data.email()}</a></p>
+        </div>
+        <a href="https://www.facebook.com/dobrawodazkranu"><img src="/fb.png" alt="facebook" /></a>
+        <table style={{width: "540px", fontFamily: "Arial"}}>
+          <tbody>
+            <h1>{this.props.name}</h1>
+          <tr>
+            <td>
+              <img src="/wpwik.jpg" alt="wpwik" />
+            </td>
+            <td style={{fontSize: "12px"}}>
+                    <b>Wałbrzyskie Przedsiębiorstwo Wodociągów i Kanalizacji Sp. z o.o.</b><br />
+                    Al. Wyzwolenia 39, 58-300 Wałbrzych<br />
+                    Regon: 891404575, NIP: 886-26-49-062<br />
+                    <a href="http://www.wpwik.pl">www.wpwik.pl</a>; e-mail: <a href="mailto:sekretariat@wpwik.pl">sekretariat@wpwik.pl</a><br />
+                    KRS: 0000097537, Sąd Rejonowy dla Wrocławia – Fabrycznej we Wrocławiu,<br />
+                    IX Wydział Gospodarczy Krajowego Rejestru Sądowego<br />
+                    Kapitał zakładowy : 96 657 500,00 zł <br />
+                    <hr />
+                    <span>Chroń środowisko! Drukuj tylko niezbędne wiadomości!</span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    )
+  }
+}
+
+export default Output
