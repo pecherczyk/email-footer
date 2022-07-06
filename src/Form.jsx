@@ -1,5 +1,6 @@
 import React from "react"
 import Output from "./Output"
+import removeDiacritics from "./emailHelper"
 
 class Form extends React.Component {
   constructor(props) {
@@ -8,30 +9,52 @@ class Form extends React.Component {
       name: "",
       surname: "",
       tel: "",
-      caption: ""
+      dept: "",
+      email: ""
     }
-    this.alert = this.alert.bind(this)
+    this.setName = this.setName.bind(this)
+    this.setSurname = this.setSurname.bind(this)
+    this.setDept = this.setDept.bind(this)
+    this.setTel = this.setTel.bind(this)
   }
-
-  alert(event) {
-    console.log(event.target.value)
+  setName(event) {
+    this.setState({name: event.target.value})
+    this.setState({emailName: removeDiacritics(event.target.value)})
+  }
+  setSurname(event) {
     this.setState({surname: event.target.value})
-    console.log(this.state)
+    this.setState({emailSurname: removeDiacritics(event.target.value)})
+  }
+  setDept(event) {
+    this.setState({dept: event.target.value})
+  }
+  setTel(event) {
+    this.setState({tel: event.target.value})
   }
 
   render() {
     return (
       <div>
         <form action="">
-          <label htmlFor="imie">Imię</label>
-          <input type="text" name="imie" onChange={this.alert} />
+          <div className="mb-3">
+            <label htmlFor="imie" className="form-label">Imię</label>
+            <input type="text" name="imie" onChange={this.setName} /><br />
+          </div>
           <label htmlFor="nazwisko">Nazwisko</label>
-          <input type="text" name="nazwisko" onChange={this.alert}/>
-          <label htmlFor="opis">Dział</label>
-          <input type="text" name="opis" onChange={this.alert} />
-          <input type="submit" value="Submit" />
+          <input type="text" name="nazwisko" onChange={this.setSurname}/><br />
+          <label htmlFor="dept">Stanowisko</label>
+          <input type="text" name="dept" onChange={this.setDept} /><br />
+          <label htmlFor="tel">Telefon</label>
+          <input type="text" name="tel" onChange={this.setTel}/>
         </form>
-        <Output name={this.state.surname} />
+        <Output
+          name={this.state.name}
+          surname={this.state.surname}
+          dept={this.state.dept}
+          tel={this.state.tel}
+          emailName={this.state.emailName}
+          emailSurname={this.state.emailSurname}
+        />
       </div>
     )
   }

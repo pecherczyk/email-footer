@@ -1,15 +1,5 @@
 import React from 'react'
-import removeDiacritics from "./emailHelper"
-
-const data = {
-  name: "Łukasz",
-  surname: "Pęcherczyk",
-  tel: "600 000 000",
-  title: "Informatyk - Dział IT",
-  email() {
-    return removeDiacritics(this.name) + '.' + removeDiacritics(this.surname) + '@wpwik.pl'
-  }
-}
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 class Output extends React.Component {
   constructor(props) {
@@ -20,17 +10,16 @@ class Output extends React.Component {
     return (
       <div style={{fontFamily: "Arial"}}>
         <div style={{fontSize: "18px", fontWeight: "bold", lineHeight: "180%"}}>
-          <p style={{margin:"0"}}>{data.name} {data.surname}</p>
+          <p style={{margin:"0"}}>{this.props.name} {this.props.surname}</p>
         </div>
         <div style={{lineHeight: "140%", fontSize: "14px"}}>
-            <p style={{margin: "0", fontStyle: "italic"}}>{data.title}</p>
-            <p style={{margin: "0"}}>{data.tel}</p>
-            <p style={{margin: "0"}}>e-mail: <a href={"mailto:" + data.email()}>{data.email()}</a></p>
+            <p style={{margin: "0", fontStyle: "italic"}}>{this.props.dept}</p>
+            <p style={{margin: "0"}}>{this.props.tel}</p>
+            <p style={{margin: "0"}}>e-mail: <a href={"mailto:" + this.props.emailName + '.' + this.props.emailSurname + "@wpwik.pl"}>{this.props.emailName}.{this.props.emailSurname}@wpwik.pl</a></p>
         </div>
         <a href="https://www.facebook.com/dobrawodazkranu"><img src="/fb.png" alt="facebook" /></a>
         <table style={{width: "540px", fontFamily: "Arial"}}>
           <tbody>
-            <h1>{this.props.name}</h1>
           <tr>
             <td>
               <img src="/wpwik.jpg" alt="wpwik" />
