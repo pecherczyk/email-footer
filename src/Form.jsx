@@ -34,19 +34,45 @@ class Form extends React.Component {
 
   render() {
     return (
-      <div>
-        <form action="">
-          <div className="mb-3">
-            <label htmlFor="imie" className="form-label">Imię</label>
-            <input type="text" name="imie" onChange={this.setName} /><br />
+      <div className="container">
+        <form>
+        <h1>Generator stopek e-mail</h1>
+          <div className="container">
+            <div className="row">
+              <div className="col-2">
+                <label htmlFor="inputName" className="form-label">Imię</label>
+              </div>
+              <div className="col">
+                <input type="text" id="inputName" onChange={this.setName} />
+              </div>
+            </div>
+            <div className="row align-items-start">
+              <div className="col-2">
+                <label htmlFor="inputSurname">Nazwisko</label>
+              </div>
+              <div className="col-2">
+                <input type="text" id="inputSurname" onChange={this.setSurname}/>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-2">
+                <label htmlFor="inputDept">Stanowisko</label>
+              </div>
+              <div className="col">
+                <input type="text" id="inputDept" onChange={this.setDept} />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-2">
+                <label htmlFor="tel">Telefon</label>
+              </div>
+              <div className="col">
+                <input type="text" id="tel" onChange={this.setTel}/>
+              </div>
+            </div>
           </div>
-          <label htmlFor="nazwisko">Nazwisko</label>
-          <input type="text" name="nazwisko" onChange={this.setSurname}/><br />
-          <label htmlFor="dept">Stanowisko</label>
-          <input type="text" name="dept" onChange={this.setDept} /><br />
-          <label htmlFor="tel">Telefon</label>
-          <input type="text" name="tel" onChange={this.setTel}/>
         </form>
+        <hr />
         <Output
           name={this.state.name}
           surname={this.state.surname}

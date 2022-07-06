@@ -24,7 +24,7 @@ class Output extends React.Component {
             <td>
               <img src="/wpwik.jpg" alt="wpwik" />
             </td>
-            <td style={{fontSize: "12px"}}>
+            <td style={{fontSize: "11px"}}>
                     <b>Wałbrzyskie Przedsiębiorstwo Wodociągów i Kanalizacji Sp. z o.o.</b><br />
                     Al. Wyzwolenia 39, 58-300 Wałbrzych<br />
                     Regon: 891404575, NIP: 886-26-49-062<br />
@@ -32,7 +32,7 @@ class Output extends React.Component {
                     KRS: 0000097537, Sąd Rejonowy dla Wrocławia – Fabrycznej we Wrocławiu,<br />
                     IX Wydział Gospodarczy Krajowego Rejestru Sądowego<br />
                     Kapitał zakładowy : 96 657 500,00 zł <br />
-                    <hr />
+                    <hr style={{margin: "1px"}}/>
                     <span>Chroń środowisko! Drukuj tylko niezbędne wiadomości!</span>
             </td>
           </tr>
