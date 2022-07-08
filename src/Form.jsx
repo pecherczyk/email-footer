@@ -2,6 +2,7 @@ import React from "react"
 import Output from "./Output"
 import removeDiacritics from "./emailHelper"
 
+
 class Form extends React.Component {
   constructor(props) {
     super(props)
@@ -72,7 +73,6 @@ class Form extends React.Component {
             </div>
           </div>
         </form>
-        <hr />
         <Output
           name={this.state.name}
           surname={this.state.surname}

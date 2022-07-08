@@ -1,5 +1,5 @@
 import React from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
+// import 'bootstrap/dist/css/bootstrap.min.css'
 
 class Output extends React.Component {
   constructor(props) {
@@ -8,7 +8,7 @@ class Output extends React.Component {
   }
   render() {
     return (
-      <div style={{fontFamily: "Arial"}}>
+      <div style={{fontFamily: "Arial", marginTop: "20px"}}>
         <div style={{fontSize: "18px", fontWeight: "bold", lineHeight: "180%"}}>
           <p style={{margin:"0"}}>{this.props.name} {this.props.surname}</p>
         </div>
@@ -17,14 +17,14 @@ class Output extends React.Component {
             <p style={{margin: "0"}}>{this.props.tel}</p>
             <p style={{margin: "0"}}>e-mail: <a href={"mailto:" + this.props.emailName + '.' + this.props.emailSurname + "@wpwik.pl"}>{this.props.emailName}.{this.props.emailSurname}@wpwik.pl</a></p>
         </div>
-        <a href="https://www.facebook.com/dobrawodazkranu"><img src="/fb.png" alt="facebook" /></a>
+        <a href="https://www.facebook.com/dobrawodazkranu"><img src="https://raw.githubusercontent.com/wpwik/images/main/fb.png" alt="facebook" /></a>
         <table style={{width: "540px", fontFamily: "Arial"}}>
           <tbody>
           <tr>
             <td>
-              <img src="/wpwik.jpg" alt="wpwik" />
+              <img src="https://raw.githubusercontent.com/wpwik/images/main/wpwik.jpg" alt="wpwik" />
             </td>
-            <td style={{fontSize: "11px"}}>
+            <td style={{fontSize: "12px", color: "gray"}}>
                     <b>Wałbrzyskie Przedsiębiorstwo Wodociągów i Kanalizacji Sp. z o.o.</b><br />
                     Al. Wyzwolenia 39, 58-300 Wałbrzych<br />
                     Regon: 891404575, NIP: 886-26-49-062<br />
