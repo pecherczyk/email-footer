@@ -1,0 +1,14 @@
+@keyframes inputCorrect {
+  from {background-color: #FF6565;}
+  to {background-color: #DBFEB8;}
+}
+
+.correct {
+  background-color: #DBFEB8;
+  animation-name: inputCorrect;
+  animation-duration: 1s;
+}
+
+.wrong {
+  background-color: #FF6565;
+}
