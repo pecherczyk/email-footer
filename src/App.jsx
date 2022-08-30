@@ -70,7 +70,6 @@ class App extends React.Component {
     } else {
       template = 
       <div>
-        <div className="spin"></div>
         <div>Proszę wpisać dane...</div>
       </div>
       
