@@ -14,8 +14,15 @@ class Form extends React.Component {
     return (
       <div className="container">
         <form>
-          <Header domain="wpwik.pl" />
+          <Header domain={this.props.domain} />
           <div className="container">
+            <div className="row">
+              <label htmlFor="templateSelect" className="form-label">Szablon</label>
+              <select name="" id="templateSelect" onChange={this.props.selectTemplate}>
+                <option value="@wpwik.pl">WPWIK</option>
+                <option value="@wzwik.pl">WZWIK</option>
+              </select>
+            </div>
             <div className="row">
               <label htmlFor="inputName" className="form-label">
                 Imię
@@ -58,6 +65,17 @@ class Form extends React.Component {
                 id="inputTel"
                 onChange={this.props.processData}
                 maxLength="30"
+              />
+            </div>
+            <div className="row">
+              <label htmlFor="mobile" className="form-label">
+                Komórka
+              </label>
+              <input
+                type="text"
+                id="inputMobile"
+                onChange={this.props.processData}
+                maxLength="20"
               />
             </div>
           </div>
