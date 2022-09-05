@@ -8,12 +8,11 @@ class Output extends React.Component {
   }
 
   render() {
-
     let mobile
-    if (this.props.mobile.length > 1) {
+    if(this.props.mobile) {
       mobile = <span>kom. {this.props.mobile}</span>
     } else {
-      mobile = null
+      mobile = undefined
     }
 
     return (
