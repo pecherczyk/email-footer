@@ -1,7 +1,7 @@
 import React from "react";
 import Form from "./Form";
 import validator from "./validator";
-import TemplateWpwik from "./Template";
+import TemplateWpwik from "./Template-wpwik";
 import TemplateWzwik from "./Template-wzwik";
 import removeDiacritics from "./emailHelper";
 import './App.css'
@@ -22,7 +22,6 @@ class App extends React.Component {
   }
 
   selectTemplate(event) {
-    console.log(event.target.value)
     this.setState({domain: event.target.value})
   }
 

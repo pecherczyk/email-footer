@@ -32,6 +32,7 @@ class Form extends React.Component {
                 id="inputName"
                 onChange={this.props.processData}
                 maxLength="15"
+                placeholder="Imię"
               />
             </div>
             <div className="row">
@@ -43,6 +44,7 @@ class Form extends React.Component {
                 id="inputSurname"
                 onChange={this.props.processData}
                 maxLength="28"
+                placeholder="Nazwisko-Drugie"
               />
             </div>
             <div className="row">
@@ -54,6 +56,7 @@ class Form extends React.Component {
                 id="inputDept"
                 onChange={this.props.processData}
                 maxLength="30"
+                placeholder="stanowisko"
               />
             </div>
             <div className="row">
@@ -65,6 +68,7 @@ class Form extends React.Component {
                 id="inputTel"
                 onChange={this.props.processData}
                 maxLength="30"
+                placeholder="(00) 00 00 000"
               />
             </div>
             <div className="row">
@@ -76,6 +80,7 @@ class Form extends React.Component {
                 id="inputMobile"
                 onChange={this.props.processData}
                 maxLength="20"
+                placeholder="000 000 000"
               />
             </div>
           </div>
