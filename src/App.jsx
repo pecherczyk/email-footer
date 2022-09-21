@@ -22,6 +22,7 @@ class App extends React.Component {
     this.validData = {}
     this.processData = this.processData.bind(this)
     this.selectTemplate = this.selectTemplate.bind(this)
+    this.copyTemplate = this.copyTemplate.bind(this)
   }
    
   selectTemplate(event) {
@@ -50,7 +51,7 @@ class App extends React.Component {
   }
 
  async writeToClipboard() {
-  //const type = "text/plain";
+
   const blob = new Blob(["<p style=\"color: red\">To jest tekst z BLOBA</p>"], { type: "text/html" });
 
   const data = [new window.ClipboardItem({ "text/html": blob })];
@@ -61,8 +62,17 @@ class App extends React.Component {
   }
 
   copyTemplate() {
-    let template = renderToString(<TemplateWpwik/>)
-    console.log(template)
+    let template = renderToString(<TemplateWpwik data = {this.validData}></TemplateWpwik>)
+    let templateBlob = new Blob([template], {type: "text/html"})
+
+    const data = [new window.ClipboardItem({ "text/html": templateBlob })]
+    let promise = navigator.clipboard.write(data)
+    promise.then(() => {
+      console.log('Content copied!')
+    }, () => {
+      console.error('fcuk!')
+    })
+    console.log(templateBlob)
   }
 
   processData(event) {
@@ -130,8 +140,13 @@ class App extends React.Component {
           </>
 
           break;
+
         case "@wpwik.pl":
-          template = <TemplateWpwik data = {this.validData}/>
+          template = 
+          <>
+            <TemplateWpwik data = {this.validData}/>
+            <CopyButton click = {this.copyTemplate}/>
+          </>
           break;
         default:
           break;
