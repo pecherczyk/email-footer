@@ -29,50 +29,27 @@ class App extends React.Component {
     this.setState({domain: event.target.value})
   }
 
-  async hello(event) {
-    try {
-      const clipboardItems = await navigator.clipboard.read();
-  
-      for (const clipboardItem of clipboardItems) {
-  
-        for (const type of clipboardItem.types) {
-          const blob = await clipboardItem.getType(type);
-          // we can now use blob here
-         let promise = blob.text()
-         promise.then((result) => {
-          console.log(result)
-         })
-        }
-      }
+  copyTemplate(param) {
 
-    } catch (err) {
-      console.error(err.name, err.message);
+    let template
+
+    if (param === 'wpwik') {
+      template = renderToString(<TemplateWpwik data = {this.validData}></TemplateWpwik>)
+    } else {
+      template = renderToString(<TemplateWzwik data = {this.validData}></TemplateWzwik>)
     }
-  }
 
- async writeToClipboard() {
-
-  const blob = new Blob(["<p style=\"color: red\">To jest tekst z BLOBA</p>"], { type: "text/html" });
-
-  const data = [new window.ClipboardItem({ "text/html": blob })];
-    let promise = navigator.clipboard.write(data)
-    promise.then(() => {
-      console.log(blob)
-    }, () => {})
-  }
-
-  copyTemplate() {
-    let template = renderToString(<TemplateWpwik data = {this.validData}></TemplateWpwik>)
     let templateBlob = new Blob([template], {type: "text/html"})
 
     const data = [new window.ClipboardItem({ "text/html": templateBlob })]
     let promise = navigator.clipboard.write(data)
     promise.then(() => {
       console.log('Content copied!')
+      console.log(param)
+      window.alert('Stopka pomyślnie skopiowana do schowka -> Otwórz Outlooka i wklej stopkę w oknie "podpisy i papeteria"')
     }, () => {
-      console.error('fcuk!')
+      console.error('promise fcuked!')
     })
-    console.log(templateBlob)
   }
 
   processData(event) {
@@ -101,7 +78,7 @@ class App extends React.Component {
       this.state.inputName__ready === 1 &&
       this.state.inputSurname__ready === 1 &&
       this.state.inputDept__ready === 1 &&
-      // this.state.inputTel__ready === 1 &&
+      this.state.inputTel__ready === 1 &&
       this.state.inputMobile__ready === 1
     ) {
       const email = removeDiacritics(this.state.inputName) + '.' + removeDiacritics(this.state.inputSurname) + this.state.domain
@@ -126,7 +103,7 @@ class App extends React.Component {
       this.state.inputName__ready === 1 &&
       this.state.inputSurname__ready === 1 &&
       this.state.inputDept__ready === 1 &&
-      // this.state.inputTel__ready === 1 &&
+      this.state.inputTel__ready === 1 &&
       this.state.inputMobile__ready === 1
     ) {
 
@@ -136,7 +113,7 @@ class App extends React.Component {
           template = 
           <>
             <TemplateWzwik data = {this.validData}/>
-            <CopyButton />
+            <CopyButton copy = {this.copyTemplate} param = {'wzwik'} />
           </>
 
           break;
@@ -145,7 +122,7 @@ class App extends React.Component {
           template = 
           <>
             <TemplateWpwik data = {this.validData}/>
-            <CopyButton click = {this.copyTemplate}/>
+            <CopyButton copy = {this.copyTemplate} param = {'wpwik'}/>
           </>
           break;
         default:

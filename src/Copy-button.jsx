@@ -5,8 +5,9 @@ class CopyButton extends React.Component {
     super()
     this.state ={}
   }
+
   render() {
-    return <button onClick={this.props.click}>Kopiuj do Outlooka</button>
+    return <button onClick={(e) => this.props.copy(this.props.param, e)}>Kopiuj do schowka</button>
   }
 }
 
