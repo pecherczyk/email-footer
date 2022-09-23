@@ -1,10 +1,12 @@
 import React from "react";
 import Form from "./Form";
+import './App.css'
 import validator from "./validator";
 import TemplateWpwik from "./Template-wpwik";
 import TemplateWzwik from "./Template-wzwik";
 import removeDiacritics from "./emailHelper";
-import './App.css'
+import CopyButton from "./Copy-button";
+import { renderToString } from "react-dom/server"
 
 class App extends React.Component {
   constructor(props) {
@@ -17,12 +19,37 @@ class App extends React.Component {
       domain: '@wpwik.pl',
       inputMobile__ready: 1
     }
+    this.validData = {}
     this.processData = this.processData.bind(this)
     this.selectTemplate = this.selectTemplate.bind(this)
+    this.copyTemplate = this.copyTemplate.bind(this)
   }
-
+   
   selectTemplate(event) {
     this.setState({domain: event.target.value})
+  }
+
+  copyTemplate(param) {
+
+    let template
+
+    if (param === 'wpwik') {
+      template = renderToString(<TemplateWpwik data = {this.validData}></TemplateWpwik>)
+    } else {
+      template = renderToString(<TemplateWzwik data = {this.validData}></TemplateWzwik>)
+    }
+
+    let templateBlob = new Blob([template], {type: "text/html"})
+
+    const data = [new window.ClipboardItem({ "text/html": templateBlob })]
+    let promise = navigator.clipboard.write(data)
+    promise.then(() => {
+      console.log('Content copied!')
+      console.log(param)
+      window.alert('Stopka pomyślnie skopiowana do schowka -> Otwórz Outlooka i wklej stopkę w oknie "podpisy i papeteria"')
+    }, () => {
+      console.error('promise fcuked!')
+    })
   }
 
   processData(event) {
@@ -46,11 +73,30 @@ class App extends React.Component {
     }
   }
 
-  callbackFunction = (formData) => {
-    this.setState(formData)
-  }
-
   render(){
+    if (
+      this.state.inputName__ready === 1 &&
+      this.state.inputSurname__ready === 1 &&
+      this.state.inputDept__ready === 1 &&
+      this.state.inputTel__ready === 1 &&
+      this.state.inputMobile__ready === 1
+    ) {
+      const email = removeDiacritics(this.state.inputName) + '.' + removeDiacritics(this.state.inputSurname) + this.state.domain
+      this.validData = {
+        name: this.state.inputName,
+        surname: this.state.inputSurname,
+        email: email,
+        dept: this.state.inputDept,
+        tel: this.state.inputTel,
+        domain: this.state.domain,
+        mobile: this.state.inputMobile
+      }
+    } else {
+      this.validData = null
+    }
+
+    console.log(this.validData)
+
     let template
 
     if (
@@ -61,32 +107,23 @@ class App extends React.Component {
       this.state.inputMobile__ready === 1
     ) {
 
-      const email = removeDiacritics(this.state.inputName) + '.' + removeDiacritics(this.state.inputSurname) + this.state.domain
-
       switch (this.state.domain) {
         case "@wzwik.pl":
+
           template = 
-          <TemplateWzwik
-            name = {this.state.inputName}
-            surname = {this.state.inputSurname}
-            dept = {this.state.inputDept}
-            tel = {this.state.inputTel}
-            email = {email}
-            domain = {this.props.domain}
-            mobile = {this.state.inputMobile}
-        />
+          <>
+            <TemplateWzwik data = {this.validData}/>
+            <CopyButton copy = {this.copyTemplate} param = {'wzwik'} />
+          </>
+
           break;
+
         case "@wpwik.pl":
           template = 
-          <TemplateWpwik 
-            name = {this.state.inputName}
-            surname = {this.state.inputSurname}
-            dept = {this.state.inputDept}
-            tel = {this.state.inputTel}
-            email = {email}
-            domain = {this.props.domain}
-            mobile = {this.state.inputMobile}
-          />
+          <>
+            <TemplateWpwik data = {this.validData}/>
+            <CopyButton copy = {this.copyTemplate} param = {'wpwik'}/>
+          </>
           break;
         default:
           break;
@@ -102,7 +139,6 @@ class App extends React.Component {
     return (
       <div>
         <Form
-          formDataCallback = {this.callbackFunction}
           processData = {this.processData}
           selectTemplate = {this.selectTemplate}
           domain = {this.state.domain}

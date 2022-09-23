@@ -9,8 +9,8 @@ class Output extends React.Component {
 
   render() {
     let mobile
-    if(this.props.mobile) {
-      mobile = <span>kom. {this.props.mobile}</span>
+    if(this.props.data.mobile) {
+      mobile = <span>kom. {this.props.data.mobile}</span>
     } else {
       mobile = undefined
     }
@@ -18,13 +18,13 @@ class Output extends React.Component {
     return (
       <div className="animated fadeIn" style={{fontFamily: "Arial", marginTop: "20px"}}>
         <div style={{fontSize: "18px", fontWeight: "bold", lineHeight: "180%"}}>
-          <p style={{margin:"0"}}>{this.props.name} {this.props.surname}</p>
+          <p style={{margin:"0"}}>{this.props.data.name} {this.props.data.surname}</p>
         </div>
         <div style={{lineHeight: "140%", fontSize: "14px"}}>
-            <p style={{margin: "0", fontStyle: "italic"}}>{this.props.dept}</p>
-            <p style={{margin: "0"}}>{this.props.tel}</p>
+            <p style={{margin: "0", fontStyle: "italic"}}>{this.props.data.dept}</p>
+            <p style={{margin: "0"}}>{this.props.data.tel}</p>
             {mobile}
-            <p style={{margin: "0"}}>e-mail: <a href={"mailto:" + this.props.email}>{this.props.email}</a></p>
+            <p style={{margin: "0"}}>e-mail: <a href={"mailto:" + this.props.data.email}>{this.props.data.email}</a></p>
         </div>
         <table style={{width: "540px", fontFamily: "Arial"}}>
           <tbody>
