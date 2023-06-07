@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react'
 
 class CopyButton extends React.Component {
-  constructor(props){
+  constructor (props) {
     super()
-    this.state ={}
+    this.state = {}
   }
 
-  render() {
+  render () {
     return <button onClick={(e) => this.props.copy(this.props.param, e)}>Kopiuj do schowka</button>
   }
 }
